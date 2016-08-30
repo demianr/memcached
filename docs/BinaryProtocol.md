@@ -89,6 +89,26 @@ General format of a packet:
 * Total body length: Length in bytes of extra + key + value
 * Opaque: Will be copied back to you in the response
 * CAS: Data version check
+ 
+### Extra data fields for request
+
+The extra data is dependant on the command. Possible fields are
+described below.
+
+Flags, a arbitrary 32-bit unsigned integer that the server stores
+  along with the data and sends back when the item is retrieved.
+  Clients may use this as a bit field to store data-specific information;
+  this field is opaque to the server. Note that in memcached 1.2.0 and
+  lower, flags are 16-bits, instead of 32, you should restrict yourself
+  to 16 bits for compatibility with older versions.
+
+Expiration, the expiration time. If it's 0, the item never expires
+  (although it may be deleted from the cache to make place for other
+  items). If it's non-zero (either Unix time or offset in seconds from
+  current time), it is guaranteed that clients will not be able to
+  retrieve this item after the expiration time arrives (measured by
+  server time). If a negative value is given the item is immediately
+  expired.
 
 ## Defined Values
 
