@@ -92,7 +92,7 @@ General format of a packet:
  
 ### Extra data fields for request
 
-The extra data is dependant on the command. Possible fields are
+The extra data is dependent on the command. Possible fields are
 described below.
 
 Flags, a arbitrary 32-bit unsigned integer that the server stores
